@@ -1,0 +1,40 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{preamble}
+\usepackage{amsmath}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Edit These for yourself
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\course{Machine Learning}
+\newcommand\userID{Emanuele Belli 03720425 \\ Thomas Brunner 03675118\\ Luca Corbucci 03726968}
+
+\begin{document}.
+
+\section*{Problem 1}
+
+Proof:
+
+$$y = log \sum_{e=1}^N e^{x_i}$$
+$$e^y = \sum_{i=1}^N e^{x_i}$$
+$$e^{-a}e^{y} = e^{-a}\sum_{i=1}^N e^{x_i}$$
+$$e^{y-a} = \sum_{i=1}^N e^{x_i}e^{-a}$$
+$$e^{y-a} = \sum_{i=1}^N e^{x_i - a}$$
+$$y-a = log\sum_{i=1}^N e^{x_i - a}$$
+$$y = a + log\sum_{i=1}^N e^{x_i-a}$$
+
+\section*{Problem 2}
+
+Proof: 
+
+$$\frac{e^{x_i - a}}{\sum_{i=1}^N e^{x_i-a}}=\frac{e^{x_i}e^{-a}}{\sum_{i=1}^N e^{x_1}e^{-a}} $$
+
+$$\frac{e^x_ie^{-a}}{e^{-a}\sum_{i=1}^N e^{x_i}} = \frac{e^{x_i}}{\sum_{i=1}^N e^{x_i}}$$
+
+
+Alternative Proof:
+
+$$y = \frac{e^{x_i}}{\sum_{i=1}^N e^{x_i}}$$
+$$y e^{-a} = \frac{e^{x_i}}{\sum_{i=1}^N e^{x_i}} e^{-a}$$
+$$y e^{-a} = \frac{e^{x_i - a}}{\sum_{i=1}^N e^{x_i}}$$
+$$y = \frac{e^{x_i-a}}{e^{-a}\sum_{i=1}^N e^{x_i}}$$
+$$y = \frac{e^{x_i-a}}{\sum_{i=1}^N e^{x_i-a}}$$
+\end{document}

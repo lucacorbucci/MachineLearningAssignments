@@ -1,0 +1,91 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{preamble}
+\usepackage{amsmath}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Edit These for yourself
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\course{Machine Learning}
+\newcommand\userID{Emanuele Belli 03720425 \\ Thomas Brunner 03675118\\ Luca Corbucci 03726968}
+
+\begin{document}.
+
+\section*{Problem 1}
+
+\begin{itemize}
+\item The perceptron algorithm finds an hyperplane that can correctly classify all the points in the dataset but this is not the best hyperplane (the best hyperplane for generalization).
+SMV finds the best hyperplane maximizing the margin.
+\item With Perceptron we can obtain different hyperplanes depending on our starting point. SVM produces only one single hyperplane.
+\item The perceptron algorithm analyze each point of the dataset and for each of the points changes the hyperplane if it is necessary. SVM needs the entire dataset to find the best hyperplane.
+\item If the dataset is not linearly separable the perceptron algorithm will not find a solution for the problem while SVM will find an optimal hyperplane (using soft margin).
+\item If we look at the constrained optimization problem of the soft margin SVM and we consider the Hing loss formulation we can write the constrained optimization problem as an unconstrained optimization problem:
+
+$$\min_{w,b} \ \frac{1}{2}w^Tw + C \sum_{i=1}^M\max\{0, 1-y_i(w^Tx_i+b)\}$$
+
+We can note that the second part of this minimization problem is the Hinge loss function $$E_{hinge} = max\{0, 1-y_i(w^Tx_i+b)\}$$
+
+This is equal to the Perceptron Hinge Loss function with $\epsilon = 1$:
+
+$$E_{hinge} = max\{0, \epsilon-y_i(w^Tx_i+b)\}$$
+
+\end{itemize}
+
+\section*{Problem 2}
+
+a) We define $$Y = diagonal(y)$$
+Y is the diagonal matrix with $y_1,...,y_n$ on the diagonal and 0 elsewhere.
+$$Q = - (Y  X \odot X^T  Y)$$
+
+b) 
+We need to show that $g(\alpha)$ is concave: $$Q\ must\ be\ negative\ definite \Leftrightarrow -(-Q) \ must \ be \ positive \ definite$$
+
+Let $\alpha \in R^N \ {0}$.
+$$a^R(-(-Q))a = a^T(diag(y)XX^Tdiag(y))a =$$ $$a^T(diag(y)x)(x^Tdiag(y))a=$$
+We use $R = (diag(y)X)$:
+$$a^TRR^Ta = (R^Ta)^T(R^Ta) = ||R^Ta||^2 > 0$$
+
+
+\section*{Problem 3}
+
+$$\epsilon = \frac{\Tilde{s}}{N} + \frac{\Tilde{ns}}{N}$$
+
+Where $\Tilde{ns}$ is equal to the number of points which are not support vectors which were misclassified and $\Tilde{s}$ is the support vector that were misclassified.
+
+$$\implies \epsilon \leq \frac{S}{N} + \frac{\Tilde{ns}}{N} $$
+
+To prove the claim we must show that $\Tilde{ns}$ is 0.
+This is clear because if $x_i$ was not a support vector, leaving it in the training will not change the solution (because of the hard margin) $\implies$ it will again be classified correctly.
+
+\section*{Problem 5}
+
+\begin{itemize}
+\item $$k(x,y) = x_1^Tx_2$$ is a valid kernel, as scalar product in $R^N$;
+\item $$k(x_1, x_2) = (x_1^Tx_2)^i $$ with $i \in N$ is a valid kernel, as product of kernels;
+\item $\sum_{i=1}^N \alpha_i(x_1^Tx_2)^i$ with $\alpha_i \geq 0$ is a valid kernel as positive comb of kernels
+\item $$k(x_1, x_2) = \sum_{i=1}^N a_i(x_1^Tx_2)^i+a_0$$ is a kernel as $\alpha_0$ (w.l.o.g. $\alpha_0 > 0$) is a kernel.
+\end{itemize}
+
+$\alpha_0$ is a kernel corresponding to $x -> \sqrt{\alpha_0}$ with the product in $R$.
+
+\section*{Problem 6}
+
+Consider $\forall N \in \N$ the transformation $\Phi_N = (0,1) -> R^NN$ $x -> (1, x, x^2,...., x^N)$. 
+Then consider as scalar product the classical scalar product such that:
+
+$$K_N(x_1, x_2) = \begin{bmatrix}1 \\ x_1 \\ x_1^2 \\....\\ x_1^N\end{bmatrix} \begin{bmatrix}1 \\ x_2 \\ x_2^2 \\....\\ x_2^N\end{bmatrix} = \sum_{i=0}^N (x_1^Tx_2)^i$$
+
+This is a kernel.
+
+Define $\Phi = \lim_{n->\infty}\Phi_N$
+
+$$\Phi(x) = (1, x, x^2,......)$$
+
+Furthermore being $x \in (0,1)$ we can define:
+
+$$K(x_1, x_2) = \lim_{N->\infty}\sum_{i=1}^N(x_1x_2)^i$$
+For the geometric series this is equal to:
+
+$$\frac{1}{1-x_1x_2}$$
+
+as the kernel of $\Phi$. This is a kernel because limit of kernel is a kernel.
+
+\end{document}
